@@ -2,7 +2,7 @@
 
 A revolutionary SaaS platform that transforms any Solana meme token into a fully-featured casino ecosystem. Create engaging gambling experiences for your community with provably fair games, seamless wallet integration, and Telegram bot support.
 
-![Solana Casino Platform](https://images.unsplash.com/photo-1518623001395-125242310d0c?auto=format&fit=crop&q=80&w=2940)
+![Solana Casino Platform](https://images.unsplash.com/photo-1596838132731-3301c3fd4317?auto=format&fit=crop&q=80&w=2070)
 
 ## 🚀 Key Features
 
