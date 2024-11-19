@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #141517;
+  --sidebar: #1a1b1e;
+  --card: #1e1f23;
+  --card-hover: #2c2d32;
+  --accent: #45b26b;
+  --border: #2a2b2f;
+  --text-primary: #ffffff;
+  --text-secondary: #808191;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text-primary antialiased;
+  }
+}
+
+@layer components {
+  .sidebar-item {
+    @apply flex items-center space-x-3 px-4 py-3 rounded-lg text-text-secondary
+           hover:bg-card hover:text-text-primary transition-colors;
+  }
+
+  .sidebar-item.active {
+    @apply bg-card text-text-primary;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 rounded-lg bg-accent text-white font-medium 
+           hover:opacity-90 transition-all;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 rounded-lg bg-card text-text-primary font-medium 
+           hover:bg-card-hover transition-all border border-border;
+  }
+
+  .card {
+    @apply bg-card rounded-xl border border-border
+           hover:border-accent/50 transition-all;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-background-80 backdrop-blur-sm border-b border-border;
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+}
