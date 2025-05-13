@@ -1,6 +1,6 @@
 # 🎰 Solana Casino Platform
 
-A revolutionary SaaS platform that transforms any Solana token into a fully-featured casino ecosystem. Create engaging gambling experiences for your community with provably fair games, seamless wallet integration, and Telegram bot support.
+Platform that transforms any Solana token into a fully-featured casino ecosystem. Create engaging gambling experiences for your community with provably fair games, seamless wallet integration, and Telegram bot support.
 
 ![Solana Casino Platform](https://raw.githubusercontent.com/AP3X-Dev/Solana-Casino/refs/heads/main/SLots.png)
 
