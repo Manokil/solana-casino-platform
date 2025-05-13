@@ -1,16 +1,27 @@
 # 🎰 Solana Casino Platform
 
-A revolutionary SaaS platform that transforms any Solana meme token into a fully-featured casino ecosystem. Create engaging gambling experiences for your community with provably fair games, seamless wallet integration, and Telegram bot support.
+A revolutionary SaaS platform that transforms any Solana token into a fully-featured casino ecosystem. Create engaging gambling experiences for your community with provably fair games, seamless wallet integration, and Telegram bot support.
 
-![Solana Casino Platform](https://images.unsplash.com/photo-1596838132731-3301c3fd4317?auto=format&fit=crop&q=80&w=2070)
+![Solana Casino Platform](./slots.png)
+
+## 🆕 Latest Updates (v1.2.0)
+
+We've made significant UI enhancements to improve the gaming experience:
+
+- **Enhanced Game Animations**: Completely redesigned animations for all games, especially the Slots game
+- **Improved Visual Design**: Better button styling, contrast, and visual feedback
+- **Sound Effects**: Added immersive sound effects to the Slots game
+- **Wallet Integration**: Simplified wallet integration with Phantom
+- **Performance Improvements**: Better loading times and smoother animations
 
 ## 🚀 Key Features
 
 ### 🎮 Provably Fair Games
-- **Coin Flip**: Classic heads or tails with 2x multiplier
-- **Dice Roll**: Customizable odds with roll under/over mechanics
-- **Chat Roulette**: Community-driven gambling in Telegram groups
-- All games use SHA256-based provably fair algorithms
+- **Coin Flip**: Classic heads or tails with 1.95x multiplier and animated coin flips
+- **Dice Roll**: Customizable odds with roll under/over mechanics and dynamic multipliers
+- **Slots**: Match symbols to win up to 25x your bet with immersive animations and sound effects
+- **Chat Roulette**: Community-driven gambling in Telegram groups (coming soon)
+- All games use SHA256-based provably fair algorithms with client and server seed verification
 
 ### 🪙 Token Integration
 - **Universal Compatibility**: Support for any SPL token
@@ -33,16 +44,25 @@ A revolutionary SaaS platform that transforms any Solana meme token into a fully
 ## 🎲 Game Mechanics
 
 ### Coin Flip
-- 50/50 chance to double your tokens
+- 50/50 chance to win 1.95x your bet
+- Animated coin flip with realistic physics
 - Provably fair outcome generation
 - Instant results and settlements
-- Historical results tracking
+- Enhanced visual feedback and history tracking
 
 ### Dice Roll
-- Choose target number between 1-99
-- Roll under/over betting system
+- Choose to roll under or over a target number
 - Dynamic multipliers based on probability
+- Animated dice roll with realistic physics
 - Real-time win probability display
+- Detailed game history with visual indicators
+
+### Slots
+- Match three symbols to win up to 25x your bet
+- Immersive slot machine animations with sequential reel stops
+- Sound effects for spinning, reel stops, and wins
+- Jackpot celebration effects with confetti and flashing lights
+- Detailed payout table and game history
 
 ### Chat Roulette (Coming Soon)
 - Community-based betting pools
@@ -76,16 +96,25 @@ const generateResult = () => {
 
 ## 📊 House Edge & Economics
 
-| Game Type  | House Edge | Min Bet | Max Bet |
-|------------|------------|---------|---------|
-| Coin Flip  | 5%         | 0.1 SOL | Dynamic |
-| Dice Roll  | 5%         | 0.1 SOL | Dynamic |
-| Roulette   | 5%       | 0.1 SOL | Dynamic |
+| Game Type  | House Edge | Min Bet | Max Bet | Max Payout |
+|------------|------------|---------|---------|------------|
+| Coin Flip  | 5%         | 0.1 SOL | Dynamic | 1.95x      |
+| Dice Roll  | 5%         | 0.1 SOL | Dynamic | Variable   |
+| Slots      | 5%         | 0.1 SOL | Dynamic | 25x        |
+| Roulette   | 5%         | 0.1 SOL | Dynamic | 36x        |
 
 Max bets are dynamically adjusted based on:
 - Liquidity pool size
 - Token volatility
 - Current exposure
+
+### Platform Fee
+
+A 1% fee is applied to all transactions and sent to the platform's development and maintenance wallet:
+- Wallet Address: `GeG6GYJCB4jRnNkztjyd29F6NgBVr1vJ83bwrxJD1S67`
+- Fee Amount: 1% of each bet
+- Purpose: Platform development, maintenance, and community initiatives
+- Transparency: All fees are recorded in the transaction history
 
 ## 🚀 Getting Started
 
@@ -117,6 +146,15 @@ npm run dev
 npm run build
 ```
 
+### Tech Stack
+- **Frontend**: React, TypeScript, Tailwind CSS, Framer Motion
+- **Blockchain**: Solana Web3.js, Wallet Adapter
+- **Animation**: Framer Motion for physics-based animations
+- **Sound**: Web Audio API for immersive sound effects
+- **State Management**: Zustand for global state
+- **Styling**: Tailwind CSS with CSS variables for theming
+- **Icons**: Lucide React for consistent iconography
+
 ## 🔐 Security Considerations
 
 - All random number generation is provably fair
@@ -125,12 +163,16 @@ npm run build
 - Multi-signature treasury controls
 - Anti-cheating mechanisms
 
-## 📈 Performance
+## 📈 Performance & UI
 
 - Sub-second transaction confirmation
 - Scalable to thousands of concurrent users
-- Real-time updates and animations
-- Optimized for mobile and desktop
+- Smooth animations with physics-based effects
+- Immersive sound design for better engagement
+- Responsive design optimized for mobile and desktop
+- High-contrast UI elements for better accessibility
+- Micro-interactions for improved user feedback
+- Consistent design language across all games
 
 ## 🤝 Community Integration
 
@@ -162,9 +204,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Solana Foundation
 - Phantom Wallet team
+- Framer Motion for animation capabilities
+- Lucide React for beautiful icons
 - Our amazing community of developers
+- UI/UX contributors for design improvements
+- Sound designers for immersive audio effects
 - All our early adopters and testers
 
 ---
 
 Built with ❤️ by the AP3X
+Last updated: May 2025

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Dices, Wallet, Settings, MessageSquare, PlusCircle } from 'lucide-react';
+import { Dices, Wallet, Settings, MessageSquare, PlusCircle, Info } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
 const Sidebar: React.FC = () => {
@@ -12,6 +12,7 @@ const Sidebar: React.FC = () => {
     { icon: <MessageSquare className="w-5 h-5" />, label: 'Telegram Bot', path: '/bot' },
     { icon: <Wallet className="w-5 h-5" />, label: 'Wallets', path: '/wallets' },
     { icon: <Settings className="w-5 h-5" />, label: 'Settings', path: '/settings' },
+    { icon: <Info className="w-5 h-5" />, label: 'About', path: '/about' },
   ];
 
   return (

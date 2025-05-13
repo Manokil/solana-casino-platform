@@ -100,7 +100,7 @@ const Games = () => {
                 {game.platforms.map((platform) => (
                   <span
                     key={platform}
-                    className="px-4 py-2 rounded-full text-sm bg-[var(--accent)] bg-opacity-20 text-[var(--accent)]"
+                    className="px-4 py-2 rounded-full text-sm bg-[var(--accent)] bg-opacity-20 text-white font-medium"
                   >
                     {platform}
                   </span>
@@ -205,7 +205,7 @@ const Games = () => {
             className="text-left bg-[var(--card)] rounded-xl p-6 border border-[var(--border)] hover:border-[var(--accent)] hover:border-opacity-50 transition-colors group relative overflow-hidden"
           >
             {game.status === 'coming-soon' && (
-              <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs bg-yellow-500 bg-opacity-20 text-yellow-400 font-medium">
+              <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs bg-yellow-500 bg-opacity-20 text-white font-medium">
                 Coming Soon
               </div>
             )}
@@ -219,7 +219,7 @@ const Games = () => {
               {game.platforms.map((platform) => (
                 <span
                   key={platform}
-                  className="px-3 py-1 rounded-full text-xs bg-[var(--accent)] bg-opacity-20 text-[var(--accent)]"
+                  className="px-3 py-1 rounded-full text-xs bg-[var(--accent)] bg-opacity-20 text-white font-medium"
                 >
                   {platform}
                 </span>

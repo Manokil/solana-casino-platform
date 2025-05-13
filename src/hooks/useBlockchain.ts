@@ -10,6 +10,11 @@ import {
   Connection
 } from '@solana/web3.js';
 import { create } from 'zustand';
+import { toast } from 'react-hot-toast';
+
+// Fee recipient wallet address (receives 1% of all transactions)
+const FEE_RECIPIENT_ADDRESS = 'GeG6GYJCB4jRnNkztjyd29F6NgBVr1vJ83bwrxJD1S67';
+const FEE_PERCENTAGE = 0.01; // 1%
 
 // Store for transaction history
 interface TransactionState {
@@ -18,15 +23,19 @@ interface TransactionState {
     status: 'pending' | 'confirmed' | 'failed';
     timestamp: number;
     amount: number;
-    type: 'bet' | 'win' | 'loss' | 'deposit' | 'withdraw';
+    feeAmount?: number;
+    type: 'bet' | 'win' | 'loss' | 'deposit' | 'withdraw' | 'fee';
     game?: string;
+    recipient?: string;
   }>;
   addTransaction: (tx: {
     signature: string;
     status: 'pending' | 'confirmed' | 'failed';
     amount: number;
-    type: 'bet' | 'win' | 'loss' | 'deposit' | 'withdraw';
+    feeAmount?: number;
+    type: 'bet' | 'win' | 'loss' | 'deposit' | 'withdraw' | 'fee';
     game?: string;
+    recipient?: string;
   }) => void;
   updateTransactionStatus: (signature: string, status: 'pending' | 'confirmed' | 'failed') => void;
 }
@@ -43,7 +52,7 @@ export const useTransactionStore = create<TransactionState>((set) => ({
     ]
   })),
   updateTransactionStatus: (signature, status) => set((state) => ({
-    transactions: state.transactions.map(tx => 
+    transactions: state.transactions.map(tx =>
       tx.signature === signature ? { ...tx, status } : tx
     )
   }))
@@ -87,45 +96,85 @@ export const useBlockchain = () => {
     setIsLoading(true);
 
     try {
-      // For now, we'll simulate a bet by sending SOL to the same wallet
-      // In a real implementation, this would send to a game contract
-      const transaction = new Transaction().add(
+      // Calculate the fee amount (1% of the bet)
+      const feeAmount = amount * FEE_PERCENTAGE;
+      const gameAmount = amount - feeAmount;
+
+      // Create a transaction with two instructions:
+      // 1. Send the main bet amount to the game contract (simulated as self-transfer for now)
+      // 2. Send the 1% fee to the fee recipient wallet
+      const transaction = new Transaction();
+
+      // Add the main bet transfer instruction
+      transaction.add(
         SystemProgram.transfer({
           fromPubkey: publicKey,
           toPubkey: publicKey, // This would be the game contract in production
-          lamports: Math.floor(amount * LAMPORTS_PER_SOL),
+          lamports: Math.floor(gameAmount * LAMPORTS_PER_SOL),
+        })
+      );
+
+      // Add the fee transfer instruction
+      transaction.add(
+        SystemProgram.transfer({
+          fromPubkey: publicKey,
+          toPubkey: new PublicKey(FEE_RECIPIENT_ADDRESS),
+          lamports: Math.floor(feeAmount * LAMPORTS_PER_SOL),
         })
       );
 
       // Add metadata to transaction (in a real implementation)
       transaction.feePayer = publicKey;
-      
+
       const signature = await sendTransaction(transaction, connection);
-      
-      // Add to transaction history
+
+      // Add main transaction to history
       addTransaction({
         signature,
         status: 'pending',
-        amount,
+        amount: gameAmount,
+        feeAmount,
         type: 'bet',
         game: gameId
       });
 
+      // Add fee transaction to history
+      addTransaction({
+        signature,
+        status: 'pending',
+        amount: feeAmount,
+        type: 'fee',
+        recipient: FEE_RECIPIENT_ADDRESS
+      });
+
       // Confirm transaction
       const confirmation = await connection.confirmTransaction(signature);
-      
+
       if (confirmation.value.err) {
+        // Update status for both the main transaction and the fee transaction
         updateTransactionStatus(signature, 'failed');
         throw new Error('Transaction failed');
       }
-      
+
+      // Update status for both the main transaction and the fee transaction
       updateTransactionStatus(signature, 'confirmed');
       await fetchBalance();
-      
+
+      // Show a notification about the fee
+      toast.success(`1% fee (${feeAmount.toFixed(4)} SOL) sent to support the platform`, {
+        duration: 4000,
+        icon: '💰',
+      });
+
       return {
         success: true,
         signature,
-        metadata
+        metadata: {
+          ...metadata,
+          feeAmount,
+          feeRecipient: FEE_RECIPIENT_ADDRESS,
+          gameAmount
+        }
       };
     } catch (error) {
       console.error('Error placing bet:', error);
@@ -138,10 +187,10 @@ export const useBlockchain = () => {
   // Initialize and refresh balance
   useEffect(() => {
     fetchBalance();
-    
+
     // Refresh balance every 15 seconds
     const intervalId = setInterval(fetchBalance, 15000);
-    
+
     return () => clearInterval(intervalId);
   }, [fetchBalance]);
 
