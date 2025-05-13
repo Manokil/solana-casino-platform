@@ -8,18 +8,46 @@
   --card: #1e1f23;
   --card-hover: #2c2d32;
   --accent: #45b26b;
+  --accent-hover: #3da05f;
   --border: #2a2b2f;
   --text-primary: #ffffff;
   --text-secondary: #808191;
+  --error: #ff5e68;
+  --success: #45b26b;
+  --warning: #ffb72b;
+  --info: #3e7bfa;
+}
+
+/* Light theme variables - will be implemented later */
+.light-theme {
+  --background: #f5f5f7;
+  --sidebar: #ffffff;
+  --card: #ffffff;
+  --card-hover: #f0f0f0;
+  --accent: #45b26b;
+  --accent-hover: #3da05f;
+  --border: #e0e0e0;
+  --text-primary: #1a1b1e;
+  --text-secondary: #6c7080;
 }
 
 @layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
   body {
     @apply bg-background text-text-primary antialiased;
+  }
+
+  /* Better focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
   }
 }
 
 @layer components {
+  /* Sidebar navigation */
   .sidebar-item {
     @apply flex items-center space-x-3 px-4 py-3 rounded-lg text-text-secondary
            hover:bg-card hover:text-text-primary transition-colors;
@@ -29,33 +57,153 @@
     @apply bg-card text-text-primary;
   }
 
+  /* Buttons */
   .btn-primary {
-    @apply px-4 py-2 rounded-lg bg-accent text-white font-medium 
-           hover:opacity-90 transition-all;
+    @apply px-4 py-2 rounded-lg bg-accent text-white font-medium
+           hover:bg-accent-hover active:opacity-90 transition-all
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply px-4 py-2 rounded-lg bg-card text-text-primary font-medium 
-           hover:bg-card-hover transition-all border border-border;
+    @apply px-4 py-2 rounded-lg bg-card text-text-primary font-medium
+           hover:bg-card-hover transition-all border border-border
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
+  .btn-outline {
+    @apply px-4 py-2 rounded-lg bg-transparent text-text-primary font-medium
+           border border-border hover:border-accent hover:text-accent
+           transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 rounded-lg bg-error/20 text-error font-medium
+           hover:bg-error/30 transition-all
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Cards */
   .card {
-    @apply bg-card rounded-xl border border-border
-           hover:border-accent/50 transition-all;
+    @apply bg-card rounded-xl border border-border p-6
+           hover:border-accent hover:border-opacity-50 transition-all;
+  }
+
+  .card-hover {
+    @apply hover:border-accent hover:border-opacity-50 hover:shadow-lg hover:shadow-accent hover:shadow-opacity-5 transition-all;
+  }
+
+  /* Form elements */
+  .input {
+    @apply w-full px-4 py-2 rounded-lg bg-background border border-border
+           focus:border-accent focus:outline-none transition-colors;
+  }
+
+  .select {
+    @apply w-full px-4 py-2 rounded-lg bg-background border border-border
+           focus:border-accent focus:outline-none transition-colors;
+  }
+
+  .checkbox {
+    @apply w-5 h-5 rounded border border-border text-accent
+           focus:ring-accent focus:ring-offset-background;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-text-secondary mb-2;
+  }
+
+  /* Badges */
+  .badge {
+    @apply px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  .badge-success {
+    @apply bg-success bg-opacity-20 text-success;
+  }
+
+  .badge-error {
+    @apply bg-error bg-opacity-20 text-error;
+  }
+
+  .badge-warning {
+    @apply bg-warning bg-opacity-20 text-warning;
+  }
+
+  .badge-info {
+    @apply bg-info bg-opacity-20 text-info;
+  }
+
+  .badge-accent {
+    @apply bg-accent bg-opacity-20 text-accent;
   }
 }
 
 @layer utilities {
+  /* Glass effect */
   .glass {
     @apply bg-background-80 backdrop-blur-sm border-b border-border;
   }
 
+  /* Hide scrollbars */
   .scrollbar-hidden {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  
+
   .scrollbar-hidden::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Text gradients */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-white to-accent bg-clip-text text-transparent;
+  }
+
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-white to-purple-400 bg-clip-text text-transparent;
+  }
+
+  /* Animations */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* Responsive utilities */
+  .mobile-only {
+    @apply block md:hidden;
+  }
+
+  .desktop-only {
+    @apply hidden md:block;
+  }
+
+  /* Custom effects for slots game */
+  .drop-shadow-glow {
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
   }
 }
