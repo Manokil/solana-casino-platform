@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { WalletProvider } from './components/WalletProvider';
 import EnhancedNavigation from './components/layout/EnhancedNavigation';
 import AppRoutes from './routes';
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 const App: React.FC = () => {
-  // Initialize app
-  useEffect(() => {
-    // Show welcome toast on first load
-    toast.success('Welcome to Solana Casino!', {
-      icon: '🎰',
-      duration: 3000,
-    });
-  }, []);
 
   return (
     <WalletProvider>

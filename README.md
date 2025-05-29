@@ -3,7 +3,19 @@ A next-generation, fully decentralized casino platform built on Solana blockchai
 
 ![Solana Casino Platform](https://raw.githubusercontent.com/AP3X-Dev/Solana-Casino/refs/heads/main/public/slots.png)
 
-## 🆕 Latest Updates (v1.3.0)
+## 🆕 Latest Updates (v1.3.2)
+
+### 🚀 Aggressive Dashboard Cleanup (v1.3.2)
+- **ELIMINATED Flash Issue**: Completely removed the marketing page that was causing flash on refresh
+- **Streamlined Dashboard**: Always shows the actual dashboard with stats and games
+- **Massive Code Reduction**: Reduced Dashboard component from 200+ lines to 50 lines (75% smaller)
+- **Better User Experience**: Direct access to Ultra games without unnecessary marketing content
+
+### 🧹 Code Cleanup & Flash Prevention (v1.3.1)
+- **Removed Old Components**: Cleaned up legacy game components that were causing flash on refresh
+- **Optimized React Rendering**: Removed StrictMode to prevent double renders and improve performance
+- **Flash Prevention**: Added CSS rules to prevent white flash on page load
+- **Codebase Streamlining**: Removed 6 unused files and cleaned up imports for better maintainability
 
 ### 🎯 Critical Navigation Fix (v1.3.0)
 - **Fixed Navigation Overlay Issue**: Resolved critical bug where navigation overlay was blocking game card clicks

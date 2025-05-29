@@ -72,6 +72,14 @@
   box-sizing: border-box;
 }
 
+/* Prevent flash of unstyled content */
+html, body, #root, main {
+  background: #0a0a0f !important;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -409,6 +417,12 @@ body {
     pointer-events: auto;
     position: relative;
     z-index: 20;
+  }
+
+  /* Prevent dashboard flash */
+  .dashboard-container {
+    background: var(--background) !important;
+    min-height: 100vh;
   }
 
   /* Form elements */

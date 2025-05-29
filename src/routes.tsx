@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
-import Games from './pages/Games';
 import CasinoCreator from './pages/CasinoCreator';
 import About from './pages/About';
 import StyleTest from './components/test/StyleTest';
