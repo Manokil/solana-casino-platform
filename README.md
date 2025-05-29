@@ -2,7 +2,7 @@
 
 A next-generation, fully decentralized casino platform built on Solana blockchain with enterprise-grade architecture, comprehensive testing, and production-ready infrastructure. Transform any Solana token into a fully-featured casino ecosystem with advanced gaming features, real-time analytics, and institutional-grade security.
 
-![Solana Casino Platform](https://raw.githubusercontent.com/AP3X-Dev/Solana-Casino/refs/heads/main/Slots.png)
+![Solana Casino Platform](https://raw.githubusercontent.com/AP3X-Dev/Solana-Casino/refs/heads/main/public/slots.png)
 
 ## 🆕 Latest Updates (v1.3.0)
 
