@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import {
   Transaction,
@@ -60,10 +60,33 @@ export const useTransactionStore = create<TransactionState>((set) => ({
 
 export const useBlockchain = () => {
   const { connection } = useConnection();
-  const { publicKey, sendTransaction } = useWallet();
+  const { publicKey, sendTransaction, signTransaction } = useWallet();
   const [balance, setBalance] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [lastUpdate, setLastUpdate] = useState<number>(0);
   const { addTransaction, updateTransactionStatus } = useTransactionStore();
+
+  // Memoized connection status
+  const isConnected = useMemo(() => !!publicKey, [publicKey]);
+
+  // Memoized program instance
+  const program = useMemo(() => {
+    if (!publicKey || !signTransaction) return null;
+
+    try {
+      const provider = new AnchorProvider(
+        connection,
+        { publicKey, signTransaction } as any,
+        { commitment: 'confirmed' }
+      );
+
+      return new Program(CasinoIDL, CASINO_PROGRAM_ID, provider);
+    } catch (error) {
+      console.error('Failed to create program instance:', error);
+      return null;
+    }
+  }, [connection, publicKey, signTransaction]);
 
   // Fetch balance
   const fetchBalance = useCallback(async () => {

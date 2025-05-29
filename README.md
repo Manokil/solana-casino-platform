@@ -1,13 +1,18 @@
-# 🎰 Solana Casino Platform
+# 🎰 Solana Casino Platform - 100X Enhanced
 
-Platform that transforms any Solana token into a fully-featured casino ecosystem. Create engaging gambling experiences for your community with provably fair games, seamless wallet integration, and Telegram bot support.
+A next-generation, fully decentralized casino platform built on Solana blockchain with enterprise-grade architecture, comprehensive testing, and production-ready infrastructure. Transform any Solana token into a fully-featured casino ecosystem with advanced gaming features, real-time analytics, and institutional-grade security.
 
-![Solana Casino Platform](https://raw.githubusercontent.com/AP3X-Dev/Solana-Casino/refs/heads/main/SLots.png)
+![Solana Casino Platform](https://raw.githubusercontent.com/AP3X-Dev/Solana-Casino/refs/heads/main/Slots.png)
 
-## 🆕 Latest Updates (v1.2.0)
+## 🆕 Latest Updates (v1.3.0)
 
-We've made significant UI enhancements to improve the gaming experience:
+### 🎯 Critical Navigation Fix (v1.3.0)
+- **Fixed Navigation Overlay Issue**: Resolved critical bug where navigation overlay was blocking game card clicks
+- **Enhanced Z-Index Management**: Implemented proper layering hierarchy for all UI components
+- **Improved Clickability**: Game cards are now fully interactive with proper pointer events
+- **Better Spacing**: Added proper padding to account for fixed navigation header
 
+### 🎮 Previous Enhancements (v1.2.0)
 - **Enhanced Game Animations**: Completely redesigned animations for all games, especially the Slots game
 - **Improved Visual Design**: Better button styling, contrast, and visual feedback
 - **Sound Effects**: Added immersive sound effects to the Slots game

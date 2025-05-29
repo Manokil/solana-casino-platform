@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { WalletProvider } from './components/WalletProvider';
-import Sidebar from './components/layout/Sidebar';
-import Header from './components/layout/Header';
+import EnhancedNavigation from './components/layout/EnhancedNavigation';
 import AppRoutes from './routes';
 import { Toaster, toast } from 'react-hot-toast';
-import { useWalletSettings } from './components/WalletProvider';
 
 const App: React.FC = () => {
   // Initialize app
@@ -20,14 +18,11 @@ const App: React.FC = () => {
   return (
     <WalletProvider>
       <BrowserRouter>
-        <div className="flex min-h-screen bg-[var(--background)]">
-          <Sidebar />
-          <div className="flex-1 ml-64">
-            <Header />
-            <main className="p-6">
-              <AppRoutes />
-            </main>
-          </div>
+        <div className="min-h-screen bg-[var(--background)]">
+          <EnhancedNavigation />
+          <main>
+            <AppRoutes />
+          </main>
 
           {/* Toast notifications */}
           <Toaster
@@ -37,10 +32,18 @@ const App: React.FC = () => {
                 background: 'var(--card)',
                 color: 'var(--text-primary)',
                 border: '1px solid var(--border)',
+                borderRadius: '12px',
+                backdropFilter: 'blur(20px)',
               },
               success: {
                 iconTheme: {
                   primary: 'var(--accent)',
+                  secondary: 'white',
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: 'var(--error)',
                   secondary: 'white',
                 },
               },

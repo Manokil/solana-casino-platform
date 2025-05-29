@@ -1,21 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #141517;
+  /* Enhanced Dark Theme */
+  --background: #0a0a0f;
+  --background-gradient: linear-gradient(135deg, #0a0a0f 0%, #1a0a1f 50%, #0a1a0f 100%);
+  --background-secondary: #0f0f14;
   --sidebar: #1a1b1e;
-  --card: #1e1f23;
-  --card-hover: #2c2d32;
-  --accent: #45b26b;
-  --accent-hover: #3da05f;
-  --border: #2a2b2f;
+  --card: rgba(30, 31, 35, 0.95);
+  --card-hover: rgba(44, 45, 50, 0.95);
+  --card-glass: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
   --text-primary: #ffffff;
-  --text-secondary: #808191;
-  --error: #ff5e68;
-  --success: #45b26b;
-  --warning: #ffb72b;
-  --info: #3e7bfa;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+
+  /* Enhanced Color Palette */
+  --accent: #00d4ff;
+  --accent-hover: #00b8e6;
+  --accent-glow: rgba(0, 212, 255, 0.3);
+  --secondary: #ff6b35;
+  --secondary-hover: #e55a2b;
+  --secondary-glow: rgba(255, 107, 53, 0.3);
+
+  /* Status Colors */
+  --success: #00ff88;
+  --success-glow: rgba(0, 255, 136, 0.3);
+  --error: #ff4757;
+  --error-glow: rgba(255, 71, 87, 0.3);
+  --warning: #ffa502;
+  --warning-glow: rgba(255, 165, 2, 0.3);
+  --info: #3742fa;
+  --info-glow: rgba(55, 66, 250, 0.3);
+
+  /* Game-specific Colors */
+  --gold: #ffd700;
+  --gold-glow: rgba(255, 215, 0, 0.4);
+  --silver: #c0c0c0;
+  --bronze: #cd7f32;
+  --diamond: #b9f2ff;
+  --emerald: #50c878;
+  --ruby: #e0115f;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+  --gradient-success: linear-gradient(135deg, var(--success) 0%, #00cc70 100%);
+  --gradient-error: linear-gradient(135deg, var(--error) 0%, #e63946 100%);
+  --gradient-gold: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+  --gradient-card: linear-gradient(135deg, rgba(30, 31, 35, 0.95) 0%, rgba(44, 45, 50, 0.8) 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px var(--accent-glow);
+  --shadow-glow-lg: 0 0 40px var(--accent-glow);
+
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Enhanced Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* Utility Classes */
+@layer utilities {
+  .glass-effect {
+    background: var(--card-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+  }
+
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .glow-effect:hover {
+    box-shadow: var(--shadow-glow-lg);
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: var(--card);
+    border-radius: 12px;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    background: var(--gradient-primary);
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out;
+  }
+
+  .animate-rotate-coin {
+    animation: rotate-coin 2s ease-in-out;
+  }
+
+  .animate-slot-spin {
+    animation: slot-spin 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .animate-dice-roll {
+    animation: dice-roll 1s ease-in-out;
+  }
+
+  .animate-card-flip {
+    animation: card-flip 0.8s ease-in-out;
+  }
+
+  .animate-jackpot {
+    animation: jackpot 1s ease-in-out;
+  }
+
+  .animate-confetti {
+    animation: confetti 3s ease-out;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--accent-glow);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate-coin {
+  0% { transform: rotateY(0deg) rotateX(0deg); }
+  25% { transform: rotateY(90deg) rotateX(180deg); }
+  50% { transform: rotateY(180deg) rotateX(360deg); }
+  75% { transform: rotateY(270deg) rotateX(540deg); }
+  100% { transform: rotateY(360deg) rotateX(720deg); }
+}
+
+@keyframes slot-spin {
+  0% { transform: translateY(0); }
+  20% { transform: translateY(-100px); }
+  40% { transform: translateY(-200px); }
+  60% { transform: translateY(-300px); }
+  80% { transform: translateY(-400px); }
+  100% { transform: translateY(-500px); }
+}
+
+@keyframes dice-roll {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  75% { transform: rotate(270deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes card-flip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+@keyframes jackpot {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(5deg);
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(-5deg);
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(5deg);
+    filter: hue-rotate(270deg);
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
 }
 
 /* Light theme variables - will be implemented later */
@@ -90,6 +396,19 @@
 
   .card-hover {
     @apply hover:border-accent hover:border-opacity-50 hover:shadow-lg hover:shadow-accent hover:shadow-opacity-5 transition-all;
+  }
+
+  /* Game Cards - Ensure clickability */
+  .game-card {
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .game-card a, .game-card button {
+    pointer-events: auto;
+    position: relative;
+    z-index: 20;
   }
 
   /* Form elements */
