@@ -200,9 +200,9 @@ npm run build
 ## 📞 Support & Resources
 
 - Documentation: [docs.solanacasino.com](https://docs.solanacasino.com)
-- Discord: [Join our server](https://discord.gg/solanacasino)
-- Twitter: [@SolanaCasino](https://twitter.com/solanacasino)
-- Email: support@solanacasino.com
+- Discord: [0xRust](https://discord.gg/548238300847144971)
+- Twitter: [@Manokil](https://x.com/0xManokil)
+
 
 ## ⚠️ Responsible Gaming
 
