@@ -202,6 +202,7 @@ npm run build
 - Documentation: [docs.solanacasino.com](https://docs.solanacasino.com)
 - Discord: [0xRust](https://discord.gg/548238300847144971)
 - Twitter: [@Manokil](https://x.com/0xManokil)
+- Telegram: [@Manokil](https://t.me/Rust0x_726)
 
 
 ## ⚠️ Responsible Gaming
